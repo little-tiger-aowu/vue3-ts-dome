@@ -1,0 +1,106 @@
+// 手指
+.cursor-pointer {
+  cursor: pointer !important;
+}
+.text-center {
+  text-align: center;
+}
+
+/* flex 弹性布局
+------------------------------- */
+.flex {
+  display: flex;
+}
+.flex-auto {
+  flex: 1;
+  // overflow: hidden;
+  white-space: initial;
+}
+.flex-center {
+  @extend .flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+.flex-a-center{
+  @extend .flex;
+  align-items: center;
+}
+.flex-between {
+  @extend .flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-around {
+  @extend .flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.flex-margin {
+  margin: auto;
+}
+.flex-warp {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* 字体大小全局样式
+------------------------------- */
+@for $i from 0 through 20 {
+  .font#{$i} {
+    font-size: #{$i}rem !important;
+  }
+}
+
+/* 外边距、内边距全局样式
+------------------------------- */
+@for $i from 0 through 100 {
+  .mt#{$i} {
+    margin-top: #{$i}rem !important;
+  }
+  .mr#{$i} {
+    margin-right: #{$i}rem !important;
+  }
+  .mb#{$i} {
+    margin-bottom: #{$i}rem !important;
+  }
+  .ml#{$i} {
+    margin-left: #{$i}rem !important;
+  }
+  .pt#{$i} {
+    padding-top: #{$i}rem !important;
+  }
+  .pr#{$i} {
+    padding-right: #{$i}rem !important;
+  }
+  .pb#{$i} {
+    padding-bottom: #{$i}rem !important;
+  }
+  .pl#{$i} {
+    padding-left: #{$i}rem !important;
+  }
+}
+@for $i from 1 through 900 {
+  .fontWeight#{$i} {
+    font-weight: #{$i} !important;
+  }
+}
+//字体
+//.Regular {
+//  font-family: "Regular";
+//}
+//.Bold {
+//  font-family: Bold;
+//}
+//
+//.Medium {
+//  font-family: "Medium";
+//}
+//.Light {
+//  font-family: "Light";
+//}
+//.Heavy {
+//  font-family: "Heavy";
+//}
+//.ExtraLight {
+//  font-family: "ExtraLight";
+//}
