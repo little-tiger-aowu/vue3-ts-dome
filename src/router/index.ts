@@ -52,6 +52,14 @@ const router = createRouter({
             isShow: true
           },
           component: ()=> import('@/views/test/test.vue')
+        },
+        {
+         path:'gitTest' ,
+          meta:{
+           title: 'git测试',
+            isShow: true
+          },
+          component: ()=> import('@/views/gitTest/index.vue')
         }
       ]
     },
