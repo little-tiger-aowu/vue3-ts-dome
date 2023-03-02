@@ -6,6 +6,7 @@ const value1 = ref() // 初始化下来框数据
 // const value1_back = ref()
 // let newArr = ref([])
 const changSelect = (val:any) =>{
+
   // console.log(_.values(value1.value))
   // addOp.value = _.difference(val,value1.value)
   // removeOp.value = _.difference(value1.value,val)
@@ -31,7 +32,7 @@ const listInfo = {
 value1.value = listInfo.oldArr
 
 
-const options = [
+const options:any = [
   {
     value: 1,
     label: 'Option1',
@@ -114,7 +115,16 @@ const options = [
   },
 ]
 
-
+const handleVisibleChange = () => {
+  let select_dom:any = document.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+  select_dom.addEventListener('scroll', function (this:any) {
+    let height = this.scrollHeight - this.scrollTop <= this.clientHeight;
+    if (height) {
+      console.log(123)
+      // code...
+    }
+  })
+}
 
 const getList = () => {
 }
@@ -153,6 +163,7 @@ const remoteMethod = (query: string) => {
       remote
       placeholder="Select"
       style="width: 240px"
+      @visible-change="handleVisibleChange"
       @change="changSelect"
       :remote-method="remoteMethod"
   >

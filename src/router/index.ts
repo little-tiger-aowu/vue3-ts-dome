@@ -60,6 +60,14 @@ const router = createRouter({
             isShow: true
           },
           component: ()=> import('@/views/gitTest/index.vue')
+        },
+        {
+          path:'authority',
+          meta:{
+            title:'权限分配',
+            isShow: true
+          },
+          component:()=>import('@/views/Authority/index.vue')
         }
       ]
     },
