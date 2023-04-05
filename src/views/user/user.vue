@@ -16,6 +16,9 @@
         </template>
      </el-table-column>
    </el-table>
+   <div>
+     <span v-html="text"></span>
+   </div>
  </div>
 </template>
 
@@ -42,6 +45,17 @@ const getUserList = () => {
   })
 }
 
+const text = ref('')
+const textContent = ref(`这是一段文字说明，<br>下边还有一段文字说明，<br>没有任何的意义只是为了凑字数.`)
+const textLength = textContent.value.length
+let i  = 0
+const print = setInterval(()=>{
+    text.value += textContent.value[i]
+    i++
+  if (i >= textLength) {
+    clearInterval(print)
+  }
+},500)
 
 </script>
 

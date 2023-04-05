@@ -36,3 +36,11 @@ export function addGoods(params: UpdataType){
         params
     })
 }
+
+// mock
+export function getMenuList() {
+    return request({
+        url:"/menu/list",
+        method:'get',
+    })
+}
