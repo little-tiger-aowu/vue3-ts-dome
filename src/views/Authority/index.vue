@@ -1,7 +1,7 @@
 <template>
   <el-tree ref="tree" node-key="id" @getCheckedKeys="getCheckedKeys" @check-change="checkChange"  :data="data" :default-checked-keys="defaultChecked"  show-checkbox />
   <el-button @click="sumbit">保存</el-button>
-  <div>当前所选中节点：{{checkNode}}</div>
+  <div>当前所选中节点：{{ checkNodeId }}</div>
 </template>
 
 <script lang="ts" setup>

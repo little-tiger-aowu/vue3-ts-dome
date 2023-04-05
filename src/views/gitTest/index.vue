@@ -1,60 +1,49 @@
 <template>
-  <el-select style="height: 200px" v-model="selectedItem" :loading="isLoading" @visible-change="handleVisibleChange" @scroll="handleScroll">
-    <el-option  v-for="option in options" :key="option.value" :label="option.label" :value="option.value"></el-option>
-    <el-option v-if="isLoading" label="Loading..." disabled></el-option>
-  </el-select>
+  <div style="width: 100%;height: 550px;" class="app-container">
+    <editor style="width: 100%;height: auto" v-model="myValue" :init="init" :disabled="disabled" :id="tinymceId"></editor>
+  </div>
 </template>
+<script setup>
+import tinymce from 'tinymce/tinymce'
+// import 'tinymce/skins/content/default/content.css'
+import Editor from '@tinymce/tinymce-vue'
+import 'tinymce/themes/silver'
+import 'tinymce/themes/silver/theme'
+import 'tinymce/icons/default'; //引入编辑器图标icon，不引入则不显示对应图标
+import 'tinymce/models/dom'
+import {ref,onMounted,reactive} from 'vue'
 
-<script >
-import { ref } from 'vue';
-
-export default {
-  setup() {
-    const selectedItem = ref(null);
-    const options = ref([]);
-    const isLoading = ref(false);
-    const page = ref(1);
-    const listRef = ref(null);
-
-    async function loadOptions() {
-      isLoading.value = true;
-      // 模拟异步请求
-      setTimeout(() => {
-        const results = [];
-        for (let i = 1; i <= 10; i++) {
-          results.push({
-            value: page.value * 10 + i,
-            label: `Option ${page.value * 10 + i}`
-          });
-        }
-        options.value = [...options.value, ...results];
-        isLoading.value = false;
-        page.value++;
-      }, 1000);
-    }
-
-    function handleVisibleChange(visible) {
-      if (visible && options.value.length === 0) {
-        loadOptions();
+const tinymceId = ref("vue-tinymce-" + +new Date() + ((Math.random() * 1000).toFixed(0) + ""))
+const myValue = ref('hello word')
+const init = reactive({
+  selector: '#' + tinymceId.value,
+  paste_preprocess: function(plugin, args) {
+    args.content = args.content.replace(/<[^>]+>/g, function(match) {
+      if (match.match(/<(p|\/p|br)[^>]*>/gi)) {
+        return match;
       }
-    }
+      return '<span style="color: red">' + match + '</span>';
+    });
+  },
+  language_url: "/tinymce/langs/zh-Hans.js",
+  language: "zh-Hans", //语言
+  branding: false,
+  plugins: 'lists  table',
+  toolbar: 'codesample bold italic underline alignleft aligncenter alignright alignjustify fontsize fontfamily | undo redo | formatselect | fontselect | fontsizeselect | forecolor backcolor | bullist numlist outdent indent | lists link table code | removeformat ',
+  font_size_formats: '11px 12px 14px 16px 18px 24px 36px 48px 64px 72px', //文字大小
+  font_family_formats: 'Arial=arial,helvetica,sans-serif; 宋体=SimSun; 鸿雷拙书简体=aaa; 微软雅黑=Microsoft Yahei; Impact=impact,chicago;', //字体
+  skin_url: "/tinymce/skins/ui/oxide",
+  content_css: '/tinymce/skins/content/default/content.css',
+  // setup:(editor) => {
+  //   tinymceId.value = editor;
+  //   editor.on('init', (ed) => {
+  //     console.log('123');
+  //     ed.target.editorCommands.execCommand("fontName", false, "鸿雷拙书简体");
+  //   });
+  // } // 设置默认字体
+})
 
-    function handleScroll(event) {
-      console.log(event)
-      const list = event.target;
-      if (list.scrollHeight - list.scrollTop === list.clientHeight && !isLoading.value) {
-        loadOptions();
-      }
-    }
-
-    return {
-      selectedItem,
-      options,
-      isLoading,
-      listRef,
-      handleVisibleChange,
-      handleScroll
-    };
-  }
-}
+onMounted(()=>{
+  tinymce.init({})
+})
 </script>
