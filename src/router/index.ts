@@ -51,7 +51,7 @@ const router = createRouter({
                         title: '选择器',
                         isShow: true
                     },
-                    component: () => import('@/views/test/test.vue')
+                    component: () => import('@/views/test/test1.vue')
                 },
                 {
                     path: 'gitTest',
